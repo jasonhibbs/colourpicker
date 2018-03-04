@@ -1,0 +1,137 @@
+// Tables  /////////////////////////////////////////////////////////
+
+// Variables ------------------------------------------------------
+@table_fontsize      : 0.875em;
+@table_padding-x     : (@lh / 4);
+@table_padding-y     : (@lh / 4);
+@table_headingweight : inherit;
+@table_background    : @white;
+@table_hover         : darken(@table_background, 6);
+@table_border-width  : 1px;
+@table_border-color  : @decorcolor;
+
+// General --------------------------------------------------------
+table {
+  width: 100%;
+  text-align: left;
+  margin-bottom: @lh;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  .table-style();
+  .table-color();
+
+  th {
+    font-weight: @table_headingweight;
+  }
+
+  // Fold -----------------------------------------------
+  @media @max-medium-screen {
+    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+
+    border-right: 1px solid @lightgrey;
+    padding-bottom: (@lh * 0.875);
+
+    caption {
+      text-align: left;
+    }
+  }
+}
+
+// Mixins /////////////////////////////////////////////////////////
+
+// Decoration ----------------------------------------------------
+.table-stripe(@color) {
+  tbody tr:nth-child(odd) {
+    background-color: @color;
+  }
+
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: transparent;
+  }
+}
+
+// Styling --------------------------------------------------------
+.table-style(@font-size: @table_fontsize, @padding-x: @table_padding-x, @padding-y: @table_padding-y, @border-width: @table_border-width, @white-space: nowrap) {
+  font-size: @font-size;
+  white-space: @white-space;
+
+  caption {
+    padding: 0 @padding-x;
+    margin-bottom: (@lh * 0.5);
+  }
+
+  th,
+  td {
+    border-top: @border-width solid;
+    padding: @padding-y @padding-x;
+    text-align: left;
+    line-height: inherit;
+    vertical-align: top;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-top: none;
+  }
+
+  tbody tr th:first-child {
+    border-right: @border-width solid;
+  }
+
+  colgroup + thead tr:first-child th,
+  colgroup + thead tr:first-child td,
+  thead:first-child tr:first-child th,
+  thead:first-child tr:first-child td {
+    border-top : 0;
+  }
+
+  tbody + tbody {
+    border-top: (@border-width * 2) solid;
+  }
+
+  tbody tr td,
+  tbody tr th {
+    transition: background-color 0.15s;
+  }
+
+  thead tr:last-child th {
+    border-bottom: (@border-width * 2) solid;
+  }
+
+  tfoot tr:first-child th {
+    border-top-width: (@border-width * 2);
+  }
+}
+
+// Colouring ------------------------------------------------------
+.table-color(@background-color: @table_background, @border-color: @table_border-color, @hover-color: @table_hover) {
+  background-color: @background-color;
+
+  th,
+  td {
+    border-top-color: @border-color;
+  }
+
+  tbody tr th:first-child {
+    border-right-color: @border-color;
+  }
+
+  tbody + tbody {
+    border-top-color: @border-color;
+  }
+
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: @hover-color;
+  }
+
+  thead tr:last-child th {
+    border-bottom-color: @border-color;
+  }
+}

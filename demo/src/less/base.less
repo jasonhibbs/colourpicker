@@ -1,0 +1,100 @@
+// Base ////////////////////////////////////////////////////////////
+@transition__sharp: 0.1s;
+@transition__mid  : 0.2s;
+@transition__slow : 0.4s;
+@transition__basic: color @transition__sharp, background-color @transition__sharp, border-color @transition__sharp, box-shadow @transition__sharp, opacity @transition__sharp;
+
+// Document --------------------------------------------------------
+html {
+  box-sizing: border-box;
+  height: 100%;
+  color: @textcolor;
+  background: @htmlcolor;
+
+  -webkit-tap-highlight-color: @highlightcolor;
+  -webkit-font-smoothing: antialiased;
+
+  font-size: unit((@fontsize_base / @fontsize_UA), em);
+
+  @media @medium-screen {
+    font-size: unit((@fontsize_medium / @fontsize_UA), em);
+  }
+  @media @large-screen {
+    font-size: unit((@fontsize_large  / @fontsize_UA), em);
+  }
+  @media @xlarge-screen {
+    font-size: unit((@fontsize_xlarge / @fontsize_UA), em);
+  }
+}
+
+*, :before, :after {
+  box-sizing: inherit;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: @bodycolor;
+
+  line-height: (@lineheight_base / @fontsize_base);
+  font-weight: @fontweight_base;
+  font-family: @fontfamily_body;
+
+  &:extend(.clearfix all);
+}
+
+
+// Links -----------------------------------------------------------
+a {
+  .link-style(@linkcolor);
+  text-decoration: none;
+}
+
+.link-style(@color, @hovercolor: darken(@color, 20)) {
+  @colorvisited  : @color;
+  @colorhover    : @hovercolor;
+  @colorfocus    : @hovercolor;
+  @coloractive   : @hovercolor;
+
+  color: @color;
+  cursor: pointer;
+  transition: @transition__basic;
+
+  &:visited {
+    color: @colorvisited;
+  }
+  &:hover {
+    color: @colorhover;
+  }
+  &:focus {
+    outline: none;
+    color: @colorfocus;
+  }
+  &:active {
+    color: @coloractive;
+  }
+
+  &._unlink {
+    color: inherit;
+
+    &:focus,
+    &:hover {
+      color: @color;
+    }
+  }
+}
+
+
+// Selection -------------------------------------------------------
+::-moz-selection {
+  background-color: @highlightcolor;
+  color: inherit;
+  text-shadow: none;
+}
+
+::selection {
+  background-color: @highlightcolor;
+  color: inherit;
+  text-shadow: none;
+}

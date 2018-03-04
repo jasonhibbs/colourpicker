@@ -1,0 +1,100 @@
+// Layout /////////////////////////////////////////////////////////
+
+// Variables ------------------------------------------------------
+@gutterwidth                   : 1.25rem;
+@gw                            : @gutterwidth;
+
+// Typical Device Sizes ---------------------------------
+@handheld-portrait__min-width  : 320px; // 20em;
+@handheld-plus__min-width      : 408px; // 25.5em;
+@handheld-landscape__min-width : 560px; // 35em;
+@tablet-portrait__min-width    : 768px; // 48em;
+@tablet-landscape__min-width   : 1024px; // 64em;
+@desktop-regular__min-width    : 1280px; // 80em;
+@desktop-medium__min-width     : 1600px; // 100em;
+@desktop-large__min-width      : 1920px; // 120em;
+@desktop-xlarge__min-width     : 2240px; // 140em;
+
+// Common Sizes -----------------------------------------
+@small-screen__min-width       : @handheld-landscape__min-width;
+@medium-screen__min-width      : @tablet-portrait__min-width;
+@large-screen__min-width       : @desktop-regular__min-width;
+@xlarge-screen__min-width      : @desktop-large__min-width;
+
+@small-screen__max-width       : (@small-screen__min-width - 1px);
+@medium-screen__max-width      : (@tablet-portrait__min-width - 1px);
+@large-screen__max-width       : (@desktop-regular__min-width - 1px);
+@xlarge-screen__max-width      : (@desktop-large__min-width - 1px);
+
+// Media Queries ----------------------------------------
+@handheld                      : ~'screen and (min-width: @{handheld-portrait__min-width})';
+@handheld-plus                 : ~'screen and (min-width: @{handheld-plus__min-width})';
+@handheld-landscape            : ~'screen and (min-width: @{handheld-landscape__min-width})';
+@tablet                        : ~'screen and (min-width: @{tablet-portrait__min-width})';
+@tablet-landscape              : ~'screen and (min-width: @{tablet-landscape__min-width})';
+@desktop                       : ~'screen and (min-width: @{desktop-regular__min-width})';
+@desktop-medium                : ~'screen and (min-width: @{desktop-medium__min-width})';
+@desktop-large                 : ~'screen and (min-width: @{desktop-large__min-width})';
+@desktop-xlarge                : ~'screen and (min-width: @{desktop-xlarge__min-width})';
+
+@small-screen                  : ~'screen and (min-width: @{small-screen__min-width})';
+@medium-screen                 : ~'screen and (min-width: @{medium-screen__min-width})';
+@large-screen                  : ~'screen and (min-width: @{large-screen__min-width})';
+@xlarge-screen                 : ~'screen and (min-width: @{xlarge-screen__min-width})';
+
+@max-small-screen              : ~'screen and (max-width: @{small-screen__max-width})';
+@max-medium-screen             : ~'screen and (max-width: @{medium-screen__max-width})';
+@max-large-screen              : ~'screen and (max-width: @{large-screen__max-width})';
+@max-xlarge-screen             : ~'screen and (max-width: @{xlarge-screen__max-width})';
+
+// Layout Sizes -----------------------------------------
+@handheld-portrait__layout     : percentage((328/375));
+@handheld-landscape__layout    : percentage((600/667));
+@tablet-portrait__layout       : unit((@fontsize_base * 36), px);
+@tablet-landscape__layout      : unit((@fontsize_base * 45), px);
+@desktop-regular__layout       : unit((@fontsize_base * 50), px);
+@desktop-medium__layout        : unit((@fontsize_base * 52), px);
+@desktop-large__layout         : unit((@fontsize_base * 60), px);
+@desktop-xlarge__layout        : unit((@fontsize_base * 64), px);
+
+@small-screen__layout          : @handheld-landscape__layout;
+@medium-screen__layout         : @tablet-portrait__layout;
+@large-screen__layout          : @desktop-medium__layout;
+@xlarge-screen__layout         : @desktop-xlarge__layout;
+
+
+// Classes --------------------------------------------------------
+.layout {
+  width: @handheld-portrait__layout; // 300 / 320 = 93.75%
+  position: relative;   // For nudging
+  .margin-x(auto);      // Centre layout
+  &:extend(.clearfix all); // Columns are floated
+
+  @media @medium-screen {
+    width: @medium-screen__layout;
+  }
+  @media @large-screen  {
+    width: @large-screen__layout;
+  }
+  @media @xlarge-screen {
+    width: @xlarge-screen__layout;
+  }
+}
+
+.column(@fraction: 1/1) {
+  @width: (100% * @fraction);
+  float: left;
+  width: ~"calc(@{width} - @{gw})";
+  .margin-x((@gw / 2));
+}
+
+.column-reset(@margin: 0) {
+  .margin-x(@margin);
+  width: auto;
+  float: none;
+}
+
+.nudge-column(@distance: (1/12)) {
+  position: relative;
+  left: percentage(@distance);
+}

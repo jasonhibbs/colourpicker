@@ -1,0 +1,89 @@
+// Colour /////////////////////////////////////////////////////////
+
+// Brand --------------------------------------
+@red               : #F30;
+@orange            : #F60;
+@yellow            : #FE4;
+@green             : #3B3;
+@lightblue         : #0CF;
+@blue              : #09F;
+@purple            : #63F;
+
+// General ------------------------------------
+@basecolor         : @blue;
+@compcolor         : @red;
+@decorcolor        : @lightergrey;
+@textcolor         : @black;
+@headingcolor      : @textcolor;
+
+@bodycolor         : @white;
+@htmlcolor         : @white;
+
+@focuscolor        : @linkcolor;
+@keyfocuscolor     : mix(@yellow, @orange, 66);
+@highlightcolor    : fadeout(@basecolor, 80%);
+
+// Links --------------------------------------
+@linkcolor         : @basecolor;
+@linkcolorvisited  : @linkcolor; //mix(@compcolor, @linkcolor, 15);
+@linkcolorhover    : darken(@linkcolor, 20);
+@linkcolorfocus    : darken(@linkcolor, 20);
+@linkcoloractive   : darken(@linkcolor, 20);
+
+// Tone ---------------------------------------
+@blackness        : 6%;
+@darkergreyness   : 25%;
+@darkgreyness     : 40%;
+@greyness         : 65%;
+@lightgreyness    : 85%;
+@lightergreyness  : 95%;
+@whiteness        : 100%;
+
+@black             : hsl(hue(@basecolor), 03%, @blackness);
+@darkergrey        : hsl(hue(@basecolor), 03%, @darkergreyness);
+@darkgrey          : hsl(hue(@basecolor), 03%, @darkgreyness);
+@grey              : hsl(hue(@basecolor), 03%, @greyness);
+@lightgrey         : hsl(hue(@basecolor), 03%, @lightgreyness);
+@lightergrey       : hsl(hue(@basecolor), 03%, @lightergreyness);
+@white             : hsl(hue(@basecolor), 03%, @whiteness);
+
+// App ----------------------------------------
+@alertcolor        : @yellow;
+@badcolor          : @red;
+@infocolor         : @blue;
+@goodcolor         : @green;
+@warningcolor      : @orange;
+@inversecolor      : @black;
+
+// Social -------------------------------------
+
+// Network --------------------------
+@facebookcolor     : rgb(059, 089, 152);
+@twittercolor      : rgb(000, 170, 239);
+@vkontaktecolor    : rgb(069, 102, 142);
+@weibocolor        : rgb(230, 022, 045);
+@googlepluscolor   : rgb(225, 091, 077);
+@linkedincolor     : rgb(000, 119, 181);
+
+// Media ----------------------------
+@tumblrcolor       : rgb(053, 070, 092);
+@pinterestcolor    : rgb(189, 008, 028);
+@instagramcolor    : rgb(088, 081, 219);
+
+// Video ----------------------------
+@youtubecolor      : rgb(255, 000, 000);
+@vimeocolor        : rgb(000, 173, 239);
+
+// Audio ----------------------------
+@spotifycolor      : rgb(030, 215, 096);
+@soundcloudcolor   : rgb(255, 085, 000);
+@deezercolor       : rgb(035, 035, 044);
+@applemusicolor    : rgb(255, 054, 093);
+
+// Chat -----------------------------
+@whatsappcolor     : rgb(037, 211, 102);
+@wechatcolor       : rgb(009, 187, 007);
+@linecolor         : rgb(000, 195, 000);
+
+// Other ----------------------------
+@googlecolor       : rgb(066, 133, 244);

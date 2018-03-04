@@ -1,0 +1,202 @@
+// Mixins /////////////////////////////////////////////////////////
+// Helpers ----------------------------------------------
+.clearfix {
+  *zoom: 1;
+
+  &:before,
+  &:after {
+    display: table;
+    line-height: 0;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.hide-text {
+  text-indent: 200%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.delist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inline-list {
+  .delist();
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: block;
+  }
+}
+
+.aspect_ratio(@w, @r) {
+  width: @w;
+  height: (@w / @r);
+}
+
+// Accessibility ----------------------------------------
+[hidden],
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.visuallyhidden {
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+
+  &.focusable:active,
+  &.focusable:focus {
+    position: static;
+    clip: auto;
+    height: auto;
+    width: auto;
+    margin: 0;
+    overflow: visible;
+  }
+}
+
+// Undoing ---------------------------------------------------------
+.no-transition {
+  &, *, *:before, *:after {
+    transition: none !important;
+  }
+}
+
+// Extending -------------------------------------------------------
+.margin-x(@margin) {
+  margin-left: @margin;
+  margin-right: @margin;
+}
+
+.margin-x(@left, @right) {
+  margin-left: @left;
+  margin-right: @right;
+}
+
+.margin-y(@margin) {
+  margin-top: @margin;
+  margin-bottom: @margin;
+}
+
+.margin-y(@top, @bottom) {
+  margin-top: @top;
+  margin-bottom: @bottom;
+}
+
+.padding-x(@padding) {
+  padding-left: @padding;
+  padding-right: @padding;
+}
+
+.padding-x(@left, @right) {
+  padding-left: @left;
+  padding-right: @right;
+}
+
+.padding-y(@padding) {
+  padding-top: @padding;
+  padding-bottom: @padding;
+}
+
+.padding-y(@top, @bottom) {
+  padding-top: @top;
+  padding-bottom: @bottom;
+}
+
+.border-x(@value) {
+  border-left: @value;
+  border-right: @value;
+}
+
+.border-y(@value) {
+  border-top: @value;
+  border-bottom: @value;
+}
+
+.border-top-radius(@value) {
+  border-top-left-radius: @value;
+  border-top-right-radius: @value;
+}
+.border-bottom-radius(@value) {
+  border-bottom-left-radius: @value;
+  border-bottom-right-radius: @value;
+}
+.border-left-radius(@value) {
+  border-top-left-radius: @value;
+  border-bottom-left-radius: @value;
+}
+.border-right-radius(@value) {
+  border-top-right-radius: @value;
+  border-bottom-right-radius: @value;
+}
+
+
+// Decoration -----------------------------------------------------
+.background__chequered(@chequer_size: 24px, @chequer_light: darken(@white, 4), @chequer_dark: darken(@white, 16)) {
+  background-color: @chequer_light;
+  background-image:
+    linear-gradient( 45deg,  @chequer_dark 25%, transparent 25%),
+    linear-gradient(-45deg,  @chequer_dark 25%, transparent 25%),
+    linear-gradient( 45deg, transparent 75%,  @chequer_dark 75%),
+    linear-gradient(-45deg, transparent 75%,  @chequer_dark 75%);
+  background-size:
+    @chequer_size @chequer_size,
+    @chequer_size @chequer_size,
+    @chequer_size @chequer_size,
+    @chequer_size @chequer_size;
+  background-position:
+    0 0,
+    0 (@chequer_size * 0.5),
+    (@chequer_size * 0.5) (@chequer_size * -0.5),
+    (@chequer_size * -0.5) 0px;
+}
+
+.arrow(@_, @size, @color) {
+  content: ''; // usually a psuedo
+  display: block;
+  color: transparent;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border: @size inset transparent;
+}
+
+.arrow(left, @size, @color) {
+  border-right-color: @color;
+  border-right-style: solid;
+}
+
+.arrow(up, @size, @color) {
+  border-bottom-color: @color;
+  border-bottom-style: solid;
+}
+
+.arrow(right, @size, @color) {
+  border-left-color: @color;
+  border-left-style: solid;
+}
+
+.arrow(down, @size, @color) {
+  border-top-color: @color;
+  border-top-style: solid;
+}

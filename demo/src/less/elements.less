@@ -1,0 +1,54 @@
+// Elements  ///////////////////////////////////////////////////////
+
+hr {
+  display: block;
+  box-sizing: border-box;
+  border: none;
+  border-top: 1px solid @decorcolor;
+  height: @lh;
+  margin: @lh 0 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+
+figure {
+  margin: 0 0 @lh;
+
+  figcaption {
+    display: block;
+    font-weight: normal;
+    font-size: 0.875em;
+    color: fadeout(@textcolor, 24);
+  }
+
+  a {
+    cursor: pointer;
+  }
+}
+
+summary {
+  cursor: pointer;
+
+  &:focus {
+    outline: 1px dotted @input_focus;
+  }
+}
+
+details {}
+
+audio,
+canvas,
+video {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+video {
+  background-color: fadeout(#000, 10%);
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html><html class="no-js" lang="en">
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>ColourPicker.js</title>
+<meta name="description" content="Colour Picker is a jQuery plugin for colour inputs">
+<meta name="author" content="Jason Hibbs">
+<link rel="shortcut icon" href="src/img/meta/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="src/img/meta/apple-touch-icon-precomposed.png">
+<meta name="apple-mobile-web-app-title" content="ColourPicker.js">
+<meta property="og:image" content="src/img/meta/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="src/css/style.css">
+<script>
+  document.documentElement.className=document.documentElement.className.replace('no-js','js')
+  
+</script><!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
+<body>
+<header role="banner">
+  <div class="layout">
+    <h1 class="site_title"><a class="_unlink" href="index.html" title="The Homepage of ColourPicker.js">ColourPicker.js</a></h1>
+  </div>
+</header>
+<main>
+  <div class="layout">
+    <p>Finally, a usable (accessible, rational, and responsive) colour picker for the web.</p>
+    <p>
+      <input id="titler" type="colour" placeholder="brown" value="gold">
+    </p>
+    <hr>
+    <h2>Why?</h2>
+    <p>I’ve not liked a single colour picker plugin I’ve found, and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color"><code>&lt;input type=&quot;color&quot;/&gt;</code> is useless to me</a>.</p>
+    <p>The premise is simple: let people type their colour, or let them find one using a <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">model designed with humans in mind</a>.</p>
+    <hr>
+    <h2>Setup</h2>
+    <pre class="_code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;colourpicker.css&quot;&gt;
+&lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;tinycolor.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;colourpicker.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+    <p>Include <a href="https://jquery.com/download/">jQuery</a>, <a href="https://github.com/bgrins/TinyColor">TinyColor</a>, and the ColourPicker files, and simply put an <code>&lt;input type=&quot;colour&quot;/&gt;</code> wherever you need one, or initialise an input with <code>$('#input').colourPicker(options)</code>.</p>
+    <p>Yes, that's the Old French spelling. Yes, it must be an input.</p>
+    <h3 class="h4">Compatibility</h3>
+    <p>It’s for the modern browsers, for sure. Here’s why:</p>
+    <ul>
+      <li><a href="https://caniuse.com/#feat=input-range">Sliders are range inputs</a></li>
+      <li><a href="https://caniuse.com/#feat=calc">Some gradients use calc()</a></li>
+    </ul>
+    <hr>
+    <h2>Examples</h2>
+    <label>
+      <p><code>&lt;input type=&quot;colour&quot; placeholder=&quot;transparent&quot; /&gt;</code></p>
+      <p>
+        <input type="colour" placeholder="transparent">
+      </p>
+    </label>
+    <label>
+      <p><code>&lt;input type=&quot;colour&quot; no-alpha=&quot;true&quot; value=&quot;dimgrey&quot; /&gt;</code></p>
+      <p>
+        <input type="colour" no-alpha="true" value="dimgrey">
+      </p>
+    </label>
+    <label>
+      <p><code>&lt;input type=&quot;colour&quot; placeholder=&quot;transparent&quot; /&gt;</code></p>
+      <p>
+        <input type="colour" placeholder="gold" value="#44f">
+      </p>
+    </label>
+    <label>
+      <p><code>&lt;input type=&quot;colour&quot; placeholder=&quot;black&quot; disabled /&gt;</code></p>
+      <p>
+        <input type="colour" placeholder="black" disabled>
+      </p>
+    </label>
+    <label>
+      <p>Magic 🌈</p>
+      <p>
+        <input id="magic" type="colour" placeholder="yellow">
+      </p>
+    </label>
+    <hr>
+    <h2>Options</h2>
+    <pre class="_code"><code>$('#input').colourPicker({
+  autoSliders   : true,
+  fallback      : 'black',
+  fallbackAlpha : 'transparent',
+  forceHex      : false,
+  matchInput    : false,
+  noAlpha       : false,
+  useLastValid  : true,
+});</code></pre>
+    <h3 class="h4">Attributes</h3>
+    <h4 class="h6"><code>[placeholder="skyblue"]</code></h4>
+    <p>The placeholder attribute is used as fallback when no input is given.</p>
+    <h4 class="h6"><code>[no-alpha="true"]</code></h4>
+    <p>Disables the alpha slider, disallows non-opaque colour. Same as <code>noAlpha: true</code>.</p>
+    <hr>
+    <h2>Methods</h2>
+    <pre class="_code"><code>$('#input').colourPicker('val' [, string]);
+$('#input').colourPicker('hue' [, 0-360]);
+$('#input').colourPicker('saturation' [, 0-1]);
+$('#input').colourPicker('value' [, 0-1]);
+$('#input').colourPicker('alpha' [, 0-1]);
+$('#input').colourPicker('show');
+$('#input').colourPicker('hide');
+$('#input').colourPicker('toggle');
+</code></pre>
+    <h3 class="h5">Colour</h3>
+    <p>get: <code>$('input').colourPicker('val'); =&gt; 'blue'</code></p>
+    <p>set: <code>$('input').colourPicker('val', 'red');</code></p>
+    <p>This is the current internal value of the ColourPicker, rather than what is in the input.</p>
+    <h3 class="h5">Hue</h3>
+    <p>get: <code>$('input').colourPicker('hue');</code></p>
+    <p>set: <code>$('input').colourPicker('hue', 360);</code></p>
+    <h3 class="h5">Saturation</h3>
+    <p>get: <code>$('input').colourPicker('saturation');</code></p>
+    <p>set: <code>$('input').colourPicker('saturation', 1);</code></p>
+    <h3 class="h5">Value (as in, HSV)</h3>
+    <p>get: <code>$('input').colourPicker('value');</code></p>
+    <p>set: <code>$('input').colourPicker('value', 1);</code></p>
+    <h3 class="h5">Alpha</h3>
+    <p>get: <code>$('input').colourPicker('alpha');</code></p>
+    <p>set: <code>$('input').colourPicker('alpha', 1);</code></p>
+    <h3 class="h5">Show Controls</h3>
+    <p><code>$('input').colourPicker('show');</code></p>
+    <h3 class="h5">Hide Controls</h3>
+    <p><code>$('input').colourPicker('hide');</code></p>
+    <h3 class="h5">Toggle Controls</h3>
+    <p><code>$('input').colourPicker('toggle');</code></p>
+    <hr>
+    <h2>Style</h2>
+    <p>ColourPicker is designed to inherit existing input styles. The included LESS is minimal on the text input, and very basic for the slider popover.</p>
+    <p>Since we’re using <code>input[type=range]</code> for the sliders, it is only compatible in recent browsers that allow styles here.</p>
+    <p>The particular style of this demo comes from my other project <a href="https://github.com/jasonhibbs/Pugless">Pugless</a> with only the addition of a focus style for the swatch button.</p>
+    <hr>
+    <h2>Is that it?</h2>
+    <p>I’m not a level 99 javascript developer so I’d appreciate that kind of feedback.</p>
+    <p>I have a few other to-dos.</p>
+  </div>
+</main>
+<footer role="contentinfo">
+  <div class="layout"></div>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>window.$ || document.write('<script src="src/js/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="src/js/script.min.js"></script></body>
+</html>
