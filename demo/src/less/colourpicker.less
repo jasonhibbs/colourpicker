@@ -1,0 +1,358 @@
+// Colour Picker 0.0.2 ////////////////////////////////////////////
+// https://github.com/jasonhibbs/colourpicker
+// Author:  Jason Mervyn Hibbs
+// License: MIT
+
+.colourpicker {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: inherit;
+  }
+}
+
+.colourpicker_input {
+  padding-right: @colourpicker_swatch__width;
+
+  &[disabled] {
+    ~ .colourpicker_swatch {
+      pointer-events: none;
+      opacity: (2/5);
+    }
+
+    ~ .colourpicker_controls {
+      display: none !important;
+    }
+  }
+}
+
+.colourpicker_swatch {
+  display: block;
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: @colourpicker_swatch__width;
+  height: 100%;
+  padding: 2px;
+}
+
+.colourpicker_swatch_button {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-radius: @colourpicker_swatch__radius;
+
+  &,
+  &:focus,
+  &:hover {
+    .colourpicker_cheque();
+  }
+
+  span,
+  svg {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    margin: auto;
+  }
+
+  span {
+    left: 0;
+  }
+
+  svg {
+    width: auto;
+    height: 100%;
+    transform: rotateZ(0deg);
+  }
+
+  polyline {
+    stroke-width: 1;
+  }
+
+  .colourpicker & polyline {
+    stroke: fadeout(white, 5);
+  }
+
+  .colourpicker._light & polyline {
+    stroke: fadeout(black, 15);
+  }
+
+  &[aria-expanded=true] {
+    svg {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.colourpicker_controls {
+  z-index: 999;
+  background: @colourpicker_controls__background;
+  .colourpicker_controls__slideup();
+
+  @media @colourpicker_breakpoint {
+    .colourpicker_controls__popover();
+
+    .colourpicker_close {
+      display: none;
+    }
+  }
+}
+
+.colourpicker_close {
+  display: block;
+  position: absolute;
+  top: 0; right: 0;
+  width: @colourpicker_close__size;
+  padding: 0;
+  cursor: pointer;
+
+  &,
+  &:focus,
+  &:hover {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  svg {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+  }
+
+  polyline {
+    stroke: #ccc;
+    stroke-width: 0.875;
+    transition: stroke 0.2s;
+  }
+
+  &:focus,
+  &:hover {
+    polyline {
+      stroke: #888;
+    }
+  }
+}
+
+.colourpicker_slider[type=range] {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  background-position: center center;
+  background-repeat: repeat;
+  border-radius: 4px;
+  margin: 0 0 8px;
+  padding: 2px;
+
+  &._alpha,
+  .colourpicker._no-alpha &._value {
+    margin-bottom: 0;
+  }
+
+  &,
+  &:focus,
+  &:hover {
+    box-shadow: @colourpicker_slider__shadow;
+  }
+
+  &:active {
+    .colourpicker_slider__thumb({
+      cursor: grabbing;
+    });
+  }
+
+  .colourpicker_slider__size(@colourpicker_slider__height__big);
+
+  .colourpicker_slider__thumb({
+    display: block;
+    appearance: none;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    cursor: grab;
+    box-shadow: 0 0 0 2px fadeout(black, 88),
+          inset 0 0 0 2px fadeout(black, 88);
+    background: transparent;
+    border: 4px solid white;
+  });
+
+  .colourpicker_slider__track({
+    outline: none;
+    border: none;
+    color: transparent;
+    background: transparent;
+  });
+
+  &::-ms-tooltip {
+    display: none;
+  }
+
+  @media @colourpicker_breakpoint {
+    border-radius: 2px;
+    .colourpicker_slider__size(@colourpicker_slider__height);
+    .colourpicker_slider__thumb({
+      border-width: 2px;
+      border-radius: 1px;
+    });
+  }
+}
+
+.colourpicker_slider._hue {
+  .colourpicker_hue();
+  background-size: 90% 100%;
+  background-size: calc(~"100% - " (@colourpicker_slider__height__big + 2px)) 100%;
+
+  @media @colourpicker_breakpoint {
+    background-size: calc(~"100% - " (@colourpicker_slider__height + 2px)) 100%;
+  }
+}
+
+.colourpicker_slider._alpha {
+  .colourpicker_cheque();
+}
+
+@-moz-document url-prefix() {
+  .colourpicker_slider {
+    // height: unit(@control_line-height, em);
+  }
+}
+
+// Variables ------------------------------------------------------
+@colourpicker_breakpoint            : ~'screen and (min-width: 768px)';
+
+@colourpicker_swatch__width         : 5em;
+@colourpicker_swatch__radius        : 1px;
+
+@colourpicker_controls__background  : whitesmoke;
+
+@colourpicker_slideup__shadow       : 0 0   2px 1px fadeout(#001, 97), 0 0   4em     fadeout(#001, 80);
+@colourpicker_popover__shadow       : 0 1px 2px 1px fadeout(#001, 90), 0 1px 1em 2px fadeout(#001, 85);
+
+@colourpicker_close__size           : (54em/16);
+
+@colourpicker_slider__height        : 14px;
+@colourpicker_slider__height__big   : 26px;
+@colourpicker_slider__shadow        : inset 0 1px 1px fadeout(#001, 90);
+
+// Mixins ---------------------------------------------------------
+
+// Backgrounds ----------------------------------------------------
+.colourpicker_hue() {
+  background-color: #f00;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(
+    90deg,
+    #f00 (100% * (0/6)),
+    #ff0 (100% * (1/6)),
+    #0f0 (100% * (2/6)),
+    #0ff (100% * (3/6)),
+    #00f (100% * (4/6)),
+    #f0f (100% * (5/6)),
+    #f00 (100% * (6/6))
+  );
+}
+
+.colourpicker_cheque(@size: 5px, @fg: darken(white, 16), @bg: darken(white, 4)) {
+  background-color: @bg;
+  background-image:
+      linear-gradient(45deg, @fg 25%, transparent 25%, transparent 75%, @fg 75%, @fg 100%),
+      linear-gradient(45deg, @fg 25%, transparent 25%, transparent 75%, @fg 75%, @fg 100%);
+  background-size: (@size * 2) (@size * 2);
+  background-position: 0 0, @size @size;
+}
+
+// Controls Styles ----------------------------
+.colourpicker_controls__slideup() {
+  position: fixed;
+  left: 0; bottom: 0; right: 0;
+  padding: @colourpicker_close__size (27em/16) (60em/16);
+  box-shadow: @colourpicker_slideup__shadow;
+  .colourpicker_transition__slideup();
+}
+
+.colourpicker_controls__popover() {
+  position: absolute;
+  right: 0; left: auto;
+  top: 100%; bottom: auto;
+
+  padding: (8em/16);
+  min-width: 12em;
+  margin-top: 6px;
+  margin-right: 6px;
+
+  border-radius: 3px;
+  box-shadow: @colourpicker_popover__shadow;
+  .colourpicker_transition__popover();
+}
+
+// [hidden] Transitions -----------------------
+.colourpicker_transition__slideup(@speed: 0.3s) {
+  visibility: visible;
+  transform: translateY(0%);
+  transform-origin: 50% 100%;
+  transition: transform @speed, box-shadow @speed, visibility 0s;
+
+  &[hidden] {
+    pointer-events: none;
+    visibility: hidden;
+    box-shadow: 0 0 0 transparent, 0 0 0 transparent;
+    display: block !important;
+    transform: translateY(100%);
+    transition: transform @speed, box-shadow @speed, visibility 0s @speed;
+  }
+}
+
+.colourpicker_transition__popover(@speed: 0.1s) {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0%) scale(1);
+  transform-origin: 75% 0%;
+  transition: transform @speed, opacity @speed, visibility 0s;
+
+  &[hidden] {
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    display: block !important;
+    transform: translateY(-2.5%) scale(0.98);
+    transition: transform @speed, opacity @speed, visibility 0s @speed;
+  }
+}
+
+// input[range] Styles ------------------------
+.colourpicker_slider__size(@height: @colourpicker_slider__height) {
+  .size(@s) {
+    width:  @s;
+    height: @s;
+  }
+
+  &::-webkit-slider-thumb {
+    .size(@height);
+  }
+  &::-moz-range-thumb {
+    .size(@height);
+  }
+  &::-ms-thumb {
+    .size(@height);
+  }
+}
+
+.colourpicker_slider__thumb(@rules) {
+  &::-webkit-slider-thumb { @rules(); }
+  &::-moz-range-thumb     { @rules(); }
+  &::-ms-thumb            { @rules(); }
+}
+
+.colourpicker_slider__track(@rules) {
+  &::-moz-range-track { @rules(); }
+  &::-ms-track        { @rules(); }
+  &::-ms-fill-lower   { @rules(); }
+  &::-ms-fill-upper   { @rules(); }
+}
+

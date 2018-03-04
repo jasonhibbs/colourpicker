@@ -2,9 +2,11 @@
 
 Finally, a usable (accessible, rational, and responsive) colour picker for the web.
 
+[✨ Demo](http://colourpicker.jasonhibbs.co.uk/)
+
 ## Why?
 
-I’ve not liked a single colour picker plugin I’ve found, and <input type="color"/> is useless to me.
+I’ve not liked a single colour picker plugin I’ve found, and `<input type="color"/>` is useless to me.
 
 The premise is simple: let people type their colour, or let them find one using a model designed with humans in mind.
 
