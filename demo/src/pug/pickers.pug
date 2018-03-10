@@ -20,13 +20,12 @@
   $('#input').colourPicker('saturation' [, 0-1]);
   $('#input').colourPicker('value' [, 0-1]);
   $('#input').colourPicker('alpha' [, 0-1]);
+  $('#input').colourPicker('isDark');
   $('#input').colourPicker('show');
   $('#input').colourPicker('hide');
   $('#input').colourPicker('toggle');
+  $('#input').colourPicker('destroy');
   `;
-
-
-
 
 p Finally, a usable (accessible, rational, and responsive) colour picker for the web.
 p
@@ -55,15 +54,21 @@ p The premise is simple: let people type their colour, or let them find one usin
 
 
 
-
 hr
 h2 Setup
 
-pre._code
-  code= setup
+p Add the required files…
+p
+  pre._code
+    code= setup
+p Then…
+p
+  pre._code._larger
+    code #{'<input type="colour"/>'}
 
 p Include #[a(href="https://jquery.com/download/") jQuery], #[a(href="https://github.com/bgrins/TinyColor") TinyColor], and the ColourPicker files, and simply put an #[code #{'<input type="colour"/>'}] wherever you need one, or initialise an input with #[code #{"$('#input').colourPicker(options)"}].
-p Yes, that's the Old French spelling. Yes, it must be an input.
+p Yes, that's the Old French spelling.
+
 
 h3.h4 Compatibility
 
@@ -158,6 +163,10 @@ p set: #[code #{"$('input').colourPicker('value', 1);"}]
 h3.h5 Alpha
 p get: #[code #{"$('input').colourPicker('alpha');"}]
 p set: #[code #{"$('input').colourPicker('alpha', 1);"}]
+
+h3.h5 isDark
+p #[code #{"$('input').colourPicker('show'); // true or false"}]
+p This is how we know if the arrow should be black or white for contrast
 
 h3.h5 Show Controls
 p #[code #{"$('input').colourPicker('show');"}]

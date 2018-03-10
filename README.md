@@ -2,7 +2,7 @@
 
 Finally, a usable (accessible, rational, and responsive) colour picker for the web.
 
-[✨ Demo](http://colourpicker.jasonhibbs.co.uk/)
+[Demo ✨](http://colourpicker.jasonhibbs.co.uk/)
 
 ## Why?
 
@@ -12,6 +12,8 @@ The premise is simple: let people type their colour, or let them find one using 
 
 ## Setup
 
+Add the required files…
+
 ```
 <link rel="stylesheet" href="colourpicker.css">
 <script src="jquery.min.js"></script>
@@ -19,9 +21,15 @@ The premise is simple: let people type their colour, or let them find one using 
 <script src="colourpicker.js"></script>
 ```
 
+Then…
+
+```
+<input type="colour"/>
+```
+
 Include jQuery, TinyColor, and the ColourPicker files, and simply put an `<input type="colour"/>` wherever you need one, or initialise an input with `$('#input').colourPicker(options);`.
 
-Yes, that's the Old French spelling. Yes, it must be an input.
+Yes, that's the Old French spelling.
 
 ### Compatibility
 
@@ -52,6 +60,7 @@ $('#input').colourPicker('hue' [, 0-360]);
 $('#input').colourPicker('saturation' [, 0-1]);
 $('#input').colourPicker('value' [, 0-1]);
 $('#input').colourPicker('alpha' [, 0-1]);
+$('#input').colourPicker('isDark');
 $('#input').colourPicker('show');
 $('#input').colourPicker('hide');
 $('#input').colourPicker('toggle');

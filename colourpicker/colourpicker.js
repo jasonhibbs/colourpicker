@@ -5,35 +5,36 @@
 
 (function($, tinycolor) {
   // Data /////////////////////////////////////////////////////////
-  // - options   : object
-  // - value     : string
-  // - wrap      : object
-  //   - el      : $
-  // - input     : object
-  //   - id      : string
-  //   - el      : $,
-  //   - placeh… : string
-  // - swatch   : object
-  //   - el      : $
-  //   - button  : $
-  //   - swatch  : $
-  // - controls  : object
-  //   - el      : $
-  //   - close   : $
-  //   - hidden  : boolean
-  // - sliders : object
-  //   - hue   : object
-  //     - input : $
-  //     - value : number
-  //   - satu… : object
-  //     - input : $
-  //     - value : number
-  //   - value : object
-  //     - input : $
-  //     - value : number
-  //   - alpha : object
-  //     - input : $
-  //     - value : number
+  // - options    : object
+  // - value      : string
+  // - wrap       : object
+  //   - el       : $
+  // - input      : object
+  //   - id       : string
+  //   - el       : $,
+  //   - original : $
+  //   - placeho… : string
+  // - swatch     : object
+  //   - el       : $
+  //   - button   : $
+  //   - swatch   : $
+  // - controls   : object
+  //   - el       : $
+  //   - close    : $
+  //   - hidden   : boolean
+  // - sliders    : object
+  //   - hue      : object
+  //     - input  : $
+  //     - value  : number
+  //   - saturat… : object
+  //     - input  : $
+  //     - value  : number
+  //   - value    : object
+  //     - input  : $
+  //     - value  : number
+  //   - alpha    : object
+  //     - input  : $
+  //     - value  : number
 
   // Setup ////////////////////////////////////////////////////////
   var name = 'colourpicker';
@@ -77,9 +78,9 @@
       return this.each(attach);
 
       function attach() {
-        var $input = $(this),
+        var $el = $(this),
             opts = $.extend({}, defaults, options),
-            picker = renderPicker($input);
+            picker = renderPicker($el);
 
         methods.options(opts, picker);
         updateDisplays(picker);
@@ -90,7 +91,8 @@
       picker = picker || getPickerData(this);
       picker.options = options;
 
-      if (picker.input.el.attr('no-alpha') == 'true') {
+      if (picker.input.el.attr('no-alpha') &&
+          picker.input.el.attr('no-alpha') !== 'false') {
         picker.options.noAlpha = true;
       }
 
@@ -207,6 +209,10 @@
       }
     },
 
+    isDark: function(picker) {
+      return isDark(picker || getPickerData(this));
+    },
+
     val: function(val, picker) {
       picker = picker || getPickerData(this);
 
@@ -217,6 +223,13 @@
         return this;
       }
     },
+
+    destroy: function(picker) {
+      picker = picker || getPickerData(this);
+      picker.input.original.insertAfter(picker.wrap.el);
+      picker.wrap.el.remove();
+      picker = null;
+    }
   };
 
   // Prototype ----------------------------------------------------
@@ -235,7 +248,33 @@
   };
 
   // Render ///////////////////////////////////////////////////////
+  function getUsableInput($el) {
+    var $input = $el;
+
+    if (!$el.is('input[type=colour]')) {
+      var originalAttributes = $el.prop('attributes');
+
+      $input = $('<input type="colour">')
+        .insertAfter($el);
+
+      $el.remove();
+
+      $.each(originalAttributes, function() {
+        if (this.name === 'type') {
+          return;
+        }
+
+        $input.attr(this.name, this.value);
+      });
+    }
+
+    return $input;
+  }
+
   function prepareInput($input) {
+    var $original = $input.clone();
+    $input = getUsableInput($input);
+
     var css = {
       fontSize  : $input.css('font-size'),
       lineHeight: $input.css('line-height')
@@ -253,9 +292,10 @@
     }
 
     return {
-      id    : $input[0].id,
-      el    : $input,
-      css   : css,
+      id          : $input[0].id,
+      el          : $input,
+      css         : css,
+      original    : $original,
       placeholder : $input.attr('placeholder')
     };
   }
@@ -331,8 +371,6 @@
       el: wrap
     };
   }
-
-
 
   function renderSliders(picker) {
     var sliders = {
@@ -483,7 +521,7 @@
     picker.wrap     = doWrap(picker);
     picker.value    = picker.input.el.val();
 
-    $input.data(name, picker);
+    picker.input.el.data(name, picker);
     return picker;
   }
 
@@ -732,14 +770,18 @@
   }
 
   function checkBrightness(picker) {
+    picker.wrap.el
+      .removeClass('_light _dark')
+      .addClass(isDark(picker) ? '_dark' : '_light');
+  }
+
+  function isDark(picker) {
     var colour     = tinycolor(picker.value),
         brightness = colour.getBrightness(),
         alpha      = colour.getAlpha(),
         is_dark    = ((brightness / 255) < 0.6 && alpha > 0.4);
 
-    picker.wrap.el
-      .removeClass('_light _dark')
-      .addClass((is_dark) ? '_dark' : '_light');
+    return is_dark;
   }
 
   function getSlidersModelColour(picker) {
@@ -779,7 +821,8 @@
 // - Default placeholders
 // - More testing of valid values with options; placeholder vs. fallback vs. no alpha, etc.
 // - getPickerData should work on multiple elements
-// - Add destroy method
 // - Add disabled state
 // - Check offset for controls position
 // - Examine HTML5 validation
+// - Examine non-# hex input
+// - If initialised on input[type=color], forceHex must be true, because spec

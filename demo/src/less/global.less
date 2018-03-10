@@ -1,7 +1,16 @@
 // Global /////////////////////////////////////////////////////////
 
+header h1 {
+  color: inherit;
+}
+
 main {
   padding: 3em 0;
+}
+
+footer {
+  padding-bottom: 5em;
+  color: @darkgrey;
 }
 
 .colourpicker_swatch button {
@@ -10,7 +19,6 @@ main {
     .control-focus-style();
   }
 }
-
 
 label {
   display: block;
@@ -23,6 +31,10 @@ label {
 
 h4 code {
   font-weight: normal;
+}
+
+pre._code._larger code {
+  font-size: (13em/12);
 }
 
 .button_github {

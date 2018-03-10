@@ -2,11 +2,17 @@
 // Scripts ////////////////////////////////////////////////////////
 
 // Titler ---------------------------------------------------------
-var $siteTitle   = $('h1.site_title'),
+var $siteHeader  = $('body > header'),
     $titlePicker = $('#titler');
 
 $titlePicker.on('change', function() {
-  $siteTitle.css('color', $titlePicker.colourPicker('val'));
+  $siteHeader.css('background-color', $titlePicker.colourPicker('val'));
+
+  if ($titlePicker.colourPicker('isDark')) {
+    $siteHeader.css('color', 'white');
+  } else {
+    $siteHeader.css('color', 'black');
+  }
 }).change();
 
 // Do the magic ---------------------------------------------------
@@ -34,4 +40,3 @@ function stopMagic() {
 }
 
 $magicLabel.hover(startMagic, stopMagic);
-

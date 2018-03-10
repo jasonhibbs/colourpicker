@@ -5,14 +5,14 @@
 <title>ColourPicker.js</title>
 <meta name="description" content="Colour Picker is a jQuery plugin for colour inputs">
 <meta name="author" content="Jason Hibbs">
-<link rel="shortcut icon" href="src/img/meta/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="src/img/meta/apple-touch-icon-precomposed.png">
+<link rel="shortcut icon" href="demo/src/img/meta/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="demo/src/img/meta/apple-touch-icon-precomposed.png">
 <meta name="apple-mobile-web-app-title" content="ColourPicker.js">
-<meta property="og:image" content="src/img/meta/share.png">
+<meta property="og:image" content="demo/src/img/meta/share.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="src/css/style.css">
+<link rel="stylesheet" href="demo/src/css/style.css">
 <script>
   document.documentElement.className=document.documentElement.className.replace('no-js','js')
   
@@ -21,6 +21,7 @@
 <header role="banner">
   <div class="layout">
     <h1 class="site_title"><a class="_unlink" href="index.html" title="The Homepage of ColourPicker.js">ColourPicker.js</a></h1>
+    <p>A jQuery plugin for colour inputs</p>
   </div>
 </header>
 <main>
@@ -44,13 +45,20 @@
     <p>The premise is simple: let people type their colour, or let them find one using a <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">model designed with humans in mind</a>.</p>
     <hr>
     <h2>Setup</h2>
-    <pre class="_code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;colourpicker.css&quot;&gt;
+    <p>Add the required files…</p>
+    <p>
+      <pre class="_code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;colourpicker.css&quot;&gt;
 &lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;tinycolor.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;colourpicker.js&quot;&gt;&lt;/script&gt;
 </code></pre>
+    </p>
+    <p>Then…</p>
+    <p>
+      <pre class="_code _larger"><code>&lt;input type=&quot;colour&quot;/&gt;</code></pre>
+    </p>
     <p>Include <a href="https://jquery.com/download/">jQuery</a>, <a href="https://github.com/bgrins/TinyColor">TinyColor</a>, and the ColourPicker files, and simply put an <code>&lt;input type=&quot;colour&quot;/&gt;</code> wherever you need one, or initialise an input with <code>$('#input').colourPicker(options)</code>.</p>
-    <p>Yes, that's the Old French spelling. Yes, it must be an input.</p>
+    <p>Yes, that's the Old French spelling.</p>
     <h3 class="h4">Compatibility</h3>
     <p>It’s for the modern browsers, for sure. Here’s why:</p>
     <ul>
@@ -112,9 +120,11 @@ $('#input').colourPicker('hue' [, 0-360]);
 $('#input').colourPicker('saturation' [, 0-1]);
 $('#input').colourPicker('value' [, 0-1]);
 $('#input').colourPicker('alpha' [, 0-1]);
+$('#input').colourPicker('isDark');
 $('#input').colourPicker('show');
 $('#input').colourPicker('hide');
 $('#input').colourPicker('toggle');
+$('#input').colourPicker('destroy');
 </code></pre>
     <h3 class="h5">Colour</h3>
     <p>get: <code>$('input').colourPicker('val'); =&gt; 'blue'</code></p>
@@ -132,6 +142,9 @@ $('#input').colourPicker('toggle');
     <h3 class="h5">Alpha</h3>
     <p>get: <code>$('input').colourPicker('alpha');</code></p>
     <p>set: <code>$('input').colourPicker('alpha', 1);</code></p>
+    <h3 class="h5">isDark</h3>
+    <p><code>$('input').colourPicker('show'); // true or false</code></p>
+    <p>This is how we know if the arrow should be black or white for contrast</p>
     <h3 class="h5">Show Controls</h3>
     <p><code>$('input').colourPicker('show');</code></p>
     <h3 class="h5">Hide Controls</h3>
@@ -150,9 +163,11 @@ $('#input').colourPicker('toggle');
   </div>
 </main>
 <footer role="contentinfo">
-  <div class="layout"></div>
+  <div class="layout"><small>
+      ©2018
+      <a class="_unlink" rel="author" href="http://jasonhibbs.co.uk">Jason Mervyn Hibbs</a><br><a class="_unlink" rel="license" href="https://opensource.org/licenses/MIT">MIT Licence</a></small></div>
 </footer>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>window.$ || document.write('<script src="src/js/jquery-3.3.1.min.js"><\/script>')</script>
-<script src="src/js/script.min.js"></script></body>
+<script>window.$ || document.write('<script src="demo/src/js/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="demo/src/js/script.min.js"></script></body>
 </html>
