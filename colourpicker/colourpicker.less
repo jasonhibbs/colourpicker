@@ -1,4 +1,4 @@
-// Colour Picker 0.0.2 ////////////////////////////////////////////
+// Colour Picker 1.0.0 ////////////////////////////////////////////
 // https://github.com/jasonhibbs/colourpicker
 // Author:  Jason Mervyn Hibbs
 // License: MIT
