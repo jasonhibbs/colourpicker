@@ -5,10 +5,10 @@
 <title>ColourPicker.js</title>
 <meta name="description" content="Colour Picker is a jQuery plugin for colour inputs">
 <meta name="author" content="Jason Hibbs">
-<link rel="shortcut icon" href="demo/src/img/meta/favicon.png?v=1">
-<link rel="apple-touch-icon-precomposed" href="demo/src/img/meta/apple-touch-icon-precomposed.png?v=1">
-<meta name="apple-mobile-web-app-title" content="ColourPicker.js">
-<meta property="og:image" content="demo/src/img/meta/share.png?v=1">
+<link rel="shortcut icon" href="demo/src/img/meta/favicon.png?v=12">
+<link rel="apple-touch-icon-precomposed" href="demo/src/img/meta/apple-touch-icon-precomposed.png?v=12">
+<meta name="apple-mobile-web-app-title" content="ColourPicker">
+<meta property="og:image" content="demo/src/img/meta/share.png?v=12">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="twitter:card" content="summary_large_image">
@@ -28,7 +28,7 @@
   <div class="layout">
     <p>Finally, a usable (accessible, rational, and responsive) colour picker for the web.</p>
     <p>
-      <input id="titler" type="colour" placeholder="brown" value="gold">
+      <input id="titler" type="colour" placeholder="brown" value="gold" aria-label="Header Colour">
     </p>
     <p><a class="button_github" role="button" href="https://github.com/jasonhibbs/colourpicker.git"><i>
           <svg class="octicon octicon-mark-github" version="1.1" width="14" height="14" viewbox="0 0 16 16" aria-hidden="true">
@@ -153,7 +153,7 @@ $('#input').colourPicker('destroy');
     <p><code>$('input').colourPicker('toggle');</code></p>
     <hr>
     <h2>Style</h2>
-    <p>ColourPicker is designed to inherit existing input styles. The included LESS is minimal on the text input, and very basic for the slider popover.</p>
+    <p>ColourPicker is designed to inherit existing input styles. The included LESS is minimal on the text input, and very basic for the slider popover. <a href="https://codepen.io/jasonhibbs/full/LdEXrm/">Here’s a minimal CSS demo</a>.</p>
     <p>Since we’re using <code>input[type=range]</code> for the sliders, it is only compatible in recent browsers that allow styles here.</p>
     <p>The particular style of this demo comes from my other project <a href="https://github.com/jasonhibbs/Pugless">Pugless</a> with only the addition of a focus style for the swatch button.</p>
     <hr>

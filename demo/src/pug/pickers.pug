@@ -29,7 +29,7 @@
 
 p Finally, a usable (accessible, rational, and responsive) colour picker for the web.
 p
-  input#titler(type="colour" placeholder="brown" value="gold")
+  input#titler(type="colour" placeholder="brown" value="gold" aria-label="Header Colour")
 p
   a.button_github(role="button", href="https://github.com/jasonhibbs/colourpicker.git")
     i
@@ -187,7 +187,7 @@ p #[code #{"$('input').colourPicker('toggle');"}]
 hr
 h2 Style
 
-p ColourPicker is designed to inherit existing input styles. The included LESS is minimal on the text input, and very basic for the slider popover.
+p ColourPicker is designed to inherit existing input styles. The included LESS is minimal on the text input, and very basic for the slider popover. #[a(href="https://codepen.io/jasonhibbs/full/LdEXrm/") Here’s a minimal CSS demo].
 p Since we’re using #[code #{'input[type=range]'}] for the sliders, it is only compatible in recent browsers that allow styles here.
 p The particular style of this demo comes from my other project #[a(href="https://github.com/jasonhibbs/Pugless") Pugless] with only the addition of a focus style for the swatch button.
 
